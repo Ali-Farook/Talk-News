@@ -20,6 +20,8 @@ const New = (props) => {
     }, [props.category]);
 
     const updateNews = async () => {
+        try {
+        
         props.setProgress(20);
         const url = `https://newsapi.org/v2/top-headlines?category=${props.category}&language=${props.language}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
         setloading(true);
@@ -28,9 +30,13 @@ const New = (props) => {
         let parsedData = await data.json();
         props.setProgress(70);
         setloading(false);
-        setarticles(parsedData.articles);
+        setarticles(parsedData?.articles);
         settotalResults(parsedData.totalResults);
         props.setProgress(100);
+            
+    } catch (error) {
+            console.log("Internal Server error!, Caused API");
+    }
     }
     useEffect(() => {
         updateNews();
@@ -54,7 +60,7 @@ const New = (props) => {
                 </div>
                 {loading && <  Spinner />}
                 <InfiniteScroll
-                    dataLength={articles.length}
+                    dataLength={articles?.length}
                     next={fetchMoreData}
                     hasMore={articles.length !== totalResults}
                     loader={<Spinner />}>
