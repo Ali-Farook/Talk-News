@@ -36,7 +36,7 @@ const New = (props) => {
         updateNews();
         // eslint-disable-next-line
     }, []);
-    
+
     const fetchMoreData = async () => {
         const url = `https://newsapi.org/v2/top-headlines?category=${props.category}&language=${props.language}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
         setpage(page + 1);
@@ -59,9 +59,9 @@ const New = (props) => {
                     hasMore={articles.length !== totalResults}
                     loader={<Spinner />}>
 
-                    <div style={{display:'flex', flexWrap:'wrap', margin:'auto'}}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', margin: 'auto' }}>
                         {articles.map((element) => {
-                            return <div  key={element.url}>
+                            return <div key={element.url}>
                                 <Newitems title={element.title} description={element.description} imgUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                             </div>
                         })}
