@@ -36,6 +36,7 @@ const New = (props) => {
         updateNews();
         // eslint-disable-next-line
     }, []);
+    
     const fetchMoreData = async () => {
         const url = `https://newsapi.org/v2/top-headlines?category=${props.category}&language=${props.language}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
         setpage(page + 1);
@@ -49,7 +50,7 @@ const New = (props) => {
         <>
             <div className="container my-3">
                 <div className="text-center" style={{ margin: '30px 30px', marginTop: '70px' }}>
-                    <h3>NewsMania - Top Headlines On {capitalizer(props.category)}</h3>
+                    <h3>  News-Talk - Top Headlines on {capitalizer(props.category)}</h3>
                 </div>
                 {loading && <  Spinner />}
                 <InfiniteScroll
@@ -58,9 +59,9 @@ const New = (props) => {
                     hasMore={articles.length !== totalResults}
                     loader={<Spinner />}>
 
-                    <div className="row mx-2 my-2">
+                    <div style={{display:'flex', flexWrap:'wrap', margin:'auto'}}>
                         {articles.map((element) => {
-                            return <div className="col-md-3 mx-4" key={element.url}>
+                            return <div  key={element.url}>
                                 <Newitems title={element.title} description={element.description} imgUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                             </div>
                         })}
@@ -81,14 +82,3 @@ New.defaultProps = {
     pageSize: 21
 }
 export default New;
-
- // const handlePrev = () => {
-    //     update();
-    //     setpage(page - 1);
-    // }
-    // const handleNext = () => {
-    //     if (!(page + 1 > Math.ceil(totalResults / props.pageSize))) {
-    //         update();
-    //         setpage(page + 1);
-    //     }
-    // }

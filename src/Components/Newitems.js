@@ -5,7 +5,7 @@ const Newitems = (props) => {
     let { title, description, imgUrl, newsUrl, author, date, source } = props;
     return (
         <div >
-            <div className="card" style={{ width: '270px' }} >
+            <div className="card" style={{ width: '300px', margin:'10px' }} >
                 <img src={imgUrl !== null ? imgUrl : "https://www.coindesk.com/resizer/F2lUOYX4sKLYLYy86TkfvXloJ7s=/1200x628/cloudfront-us-east-1.images.arcpublishing.com/coindesk/J7TH73HNI5BUZAUALAMFR4EEUM.png"} className="card-img-top" alt="..." />
                 <div className="card-body">
                     <h5 className="card-title">{title !== null ? title.slice(0, 55) : ""}...</h5>
